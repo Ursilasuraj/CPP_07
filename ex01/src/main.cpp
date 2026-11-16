@@ -6,7 +6,15 @@ void int_test(int& value)
     value += 10;
 }
 
+void long_test_non_const(long& value)
+{
+    value *= 2;
+}
 
+void long_test_const(const long& value)
+{
+    std::cout << value << " ";
+}
 
 int main()
 {
@@ -24,10 +32,22 @@ int main()
     iter(arr_int, length, print_element<int>);
     std::cout << std::endl;
 
-    // Test the Array class with long integers const references
+    // Test the Array class with long integers non-const references and const references
     long arr_long[] ={10L, 20L, 30L, 40L, 50L};
     std::size_t length_long = sizeof(arr_long) / sizeof(arr_long[0]);
 
+    std::cout << "long array with print_element: ";
+    iter(arr_long, length_long, print_element<long>);
+    std::cout << std::endl;
+
+    std::cout << "long array with long_test (non-const): ";
+    iter(arr_long, length_long, long_test_non_const);
+    iter(arr_long, length_long, print_element<long>);
+    std::cout << std::endl;
+
+    std::cout << "long array with long_test_const: ";
+    iter(arr_long, length_long, long_test_const);
+    std::cout << std::endl;
 
     return 0;
 }

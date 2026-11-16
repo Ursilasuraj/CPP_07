@@ -6,7 +6,7 @@
 /*   By: uvadakku <uvadakku@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/11/16 11:48:10 by uvadakku          #+#    #+#             */
-/*   Updated: 2026/11/16 12:30:52 by uvadakku         ###   ########.fr       */
+/*   Updated: 2026/11/16 17:08:12 by uvadakku         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,18 +17,36 @@
 #include <iostream>
 
 template <typename T>
-void print_element(const T& value)
+void print_element(const T& element)
 {
-    std::cout << value << " ";
+    std::cout << element << " ";
 }
-// Prints one array element without modifying it.
 
-template <typename T, typename F>
-void iter(T* array, const std::size_t length, F function)
+template <typename T>
+void iter(T *array, std::size_t length, void (*func)(T &))
 {
-    for (std::size_t i = 0; i < length; ++i)
-        function(array[i]);
+	// std::cout << "\nTemplate non-const called" << std::endl;
+	for (size_t i = 0; i < length; ++i)
+	{
+		func(array[i]);
+	}
 }
+
+template <typename T>
+void iter(const T *array, std::size_t length, void (*func)(const T &))
+{
+	// std::cout << "\nTemplate const called" << std::endl;
+	for (size_t i = 0; i < length; ++i)
+	{
+		func(array[i]);
+	}
+}
+
 // Calls the supplied function once for every element in the array.
+template <typename T>
+void print_elememts(T* array, const std::size_t length)
+{
+    iter(array, length, print_element<T>);
+}
 
 #endif 
