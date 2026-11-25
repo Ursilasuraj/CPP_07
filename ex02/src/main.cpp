@@ -36,7 +36,7 @@ int main(int, char**)
         {
             std::cerr << "didn't save the same value!!" << std::endl;
             delete [] mirror;
-            return;
+            return 1;
         }
     }
     try
@@ -114,3 +114,4 @@ int main(int, char**)
     std::cout << "All tests passed!" << std::endl;
     return 0;
 }
+
